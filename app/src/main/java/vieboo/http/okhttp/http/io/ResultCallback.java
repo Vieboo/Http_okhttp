@@ -1,4 +1,4 @@
-package vieboo.http.okhttp.http;
+package vieboo.http.okhttp.http.io;
 
 import com.google.gson.internal.$Gson$Types;
 import com.squareup.okhttp.Request;
@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
  */
 public abstract class ResultCallback<T> {
 
-    Type mType;
+    public Type mType;
 
     public ResultCallback()
     {

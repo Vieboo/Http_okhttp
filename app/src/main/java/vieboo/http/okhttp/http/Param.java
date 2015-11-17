@@ -15,7 +15,7 @@ public class Param {
         this.value = value;
     }
 
-    String key;
-    String value;
+    public String key;
+    public String value;
 
 }

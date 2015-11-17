@@ -1,10 +1,11 @@
 package vieboo.http.okhttp.http;
 
-import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+
+import vieboo.http.okhttp.http.io.ResultCallback;
 
 /**
  * Get请求

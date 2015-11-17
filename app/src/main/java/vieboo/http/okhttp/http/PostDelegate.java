@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
+import vieboo.http.okhttp.http.io.ResultCallback;
+
 /**
  * Post请求
  * Created by weibo.kang on 2015/11/10.
@@ -60,7 +62,8 @@ public class PostDelegate {
         postAsyn(url, params, callback, null);
     }
 
-    public void postAsyn(String url, Map<String, String> params, final ResultCallback callback, Object tag)
+    public void postAsyn(String url, Map<String, String> params, final ResultCallback callback,
+                         Object tag)
     {
         Param[] paramsArr = map2Params(params);
         postAsyn(url, paramsArr, callback, tag);
@@ -123,7 +126,8 @@ public class PostDelegate {
     /**
      * 直接将bodyFile以写入请求体
      */
-    public void postAsynWithMediaType(String url, File bodyFile, MediaType type, final ResultCallback callback, Object tag)
+    public void postAsynWithMediaType(String url, File bodyFile, MediaType type,
+                                      final ResultCallback callback, Object tag)
     {
         RequestBody body = RequestBody.create(type, bodyFile);
         Request request = buildPostRequest(url, body, tag);
@@ -133,7 +137,8 @@ public class PostDelegate {
     /**
      * 直接将bodyStr以写入请求体
      */
-    public void postAsynWithMediaType(String url, String bodyStr, MediaType type, final ResultCallback callback, Object tag)
+    public void postAsynWithMediaType(String url, String bodyStr, MediaType type,
+                                      final ResultCallback callback, Object tag)
     {
         RequestBody body = RequestBody.create(type, bodyStr);
         Request request = buildPostRequest(url, body, tag);
@@ -143,7 +148,8 @@ public class PostDelegate {
     /**
      * 直接将bodyBytes以写入请求体
      */
-    public void postAsynWithMediaType(String url, byte[] bodyBytes, MediaType type, final ResultCallback callback, Object tag)
+    public void postAsynWithMediaType(String url, byte[] bodyBytes, MediaType type,
+                                      final ResultCallback callback, Object tag)
     {
         RequestBody body = RequestBody.create(type, bodyBytes);
         Request request = buildPostRequest(url, body, tag);

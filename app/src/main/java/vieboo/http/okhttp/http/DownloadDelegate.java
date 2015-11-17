@@ -10,6 +10,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import vieboo.http.okhttp.http.io.ResultCallback;
+
 /**
  * 下载相关的模块
  * Created by weibo.kang on 2015/11/11.

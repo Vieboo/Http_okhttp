@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.net.FileNameMap;
 import java.net.URLConnection;
 
+import vieboo.http.okhttp.http.io.ResultCallback;
+
 /**
  * 上传相关的模块
  * Created by weibo.kang on 2015/11/11.
@@ -65,7 +67,8 @@ public class UploadDelegate {
     /**
      * 异步基于post的文件上传:主方法
      */
-    public void postAsyn(String url, String[] fileKeys, File[] files, Param[] params, ResultCallback callback, Object tag)
+    public void postAsyn(String url, String[] fileKeys, File[] files, Param[] params,
+                         ResultCallback callback, Object tag)
     {
         Request request = buildMultipartFormRequest(url, files, fileKeys, params, tag);
         OkHttpClientHelper.getInstance().deliveryResult(callback, request);
@@ -74,7 +77,8 @@ public class UploadDelegate {
     /**
      * 异步基于post的文件上传:单文件不带参数上传
      */
-    public void postAsyn(String url, String fileKey, File file, ResultCallback callback, Object tag) throws IOException
+    public void postAsyn(String url, String fileKey, File file, ResultCallback callback,
+                         Object tag) throws IOException
     {
         postAsyn(url, new String[]{fileKey}, new File[]{file}, null, callback, tag);
     }
@@ -82,7 +86,8 @@ public class UploadDelegate {
     /**
      * 异步基于post的文件上传，单文件且携带其他form参数上传
      */
-    public void postAsyn(String url, String fileKey, File file, Param[] params, ResultCallback callback, Object tag)
+    public void postAsyn(String url, String fileKey, File file, Param[] params,
+                         ResultCallback callback, Object tag)
     {
         postAsyn(url, new String[]{fileKey}, new File[]{file}, params, callback, tag);
     }

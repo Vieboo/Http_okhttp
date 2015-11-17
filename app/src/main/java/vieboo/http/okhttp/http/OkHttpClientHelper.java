@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -14,6 +15,8 @@ import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.util.concurrent.TimeUnit;
 
+import vieboo.http.okhttp.http.io.ResultCallback;
+
 /**
  * Created by weibo.kang on 2015/11/6.
  */
@@ -22,8 +25,8 @@ public class OkHttpClientHelper {
     private static OkHttpClientHelper mInstance;
 
     private OkHttpClient mOkHttpClient;     //OkHttpClient实例
-    private final int CONNECTION_TIME_OUT = 1;    //超时时间
-    private Handler mDelivery;
+    private Gson mGson;
+//    private Handler mDelivery;
 
     private OkHttpClientHelper() {
         mOkHttpClient = new OkHttpClient();
@@ -31,9 +34,11 @@ public class OkHttpClientHelper {
         if(Build.VERSION.SDK_INT >= 9)
             mOkHttpClient.setCookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ORIGINAL_SERVER));
         //connection time out
-        mOkHttpClient.setConnectTimeout(CONNECTION_TIME_OUT, TimeUnit.SECONDS);
+        mOkHttpClient.setConnectTimeout(HttpConstant.CONNECTION_TIME_OUT, TimeUnit.SECONDS);
 
-        mDelivery = new Handler(Looper.getMainLooper());
+        mGson = new Gson();
+
+//        mDelivery = new Handler(Looper.getMainLooper());
     }
 
     public static OkHttpClientHelper getInstance() {
@@ -51,9 +56,9 @@ public class OkHttpClientHelper {
         return mOkHttpClient;
     }
 
-    public Handler getDelivery() {
-        return mDelivery;
-    }
+//    public Handler getDelivery() {
+//        return mDelivery;
+//    }
 
 
     /**
@@ -111,8 +116,8 @@ public class OkHttpClientHelper {
                     if (resCallBack.mType == String.class) {
                         sendSuccessResultCallback(string, resCallBack);
                     } else {
-//                        Object o = mGson.fromJson(string, resCallBack.mType);
-//                        sendSuccessResultCallback(o, resCallBack);
+                        Object o = mGson.fromJson(string, resCallBack.mType);
+                        sendSuccessResultCallback(o, resCallBack);
                     }
 
                 } catch (IOException e) {
@@ -136,25 +141,31 @@ public class OkHttpClientHelper {
 
     public void sendFailedStringCallback(final Request request, final Exception e, final ResultCallback callback) {
 
-        mDelivery.post(new Runnable() {
-            @Override
-            public void run() {
-                callback.onError(request, e);
-                callback.onAfter();
-            }
-        });
+//        mDelivery.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                callback.onError(request, e);
+//                callback.onAfter();
+//            }
+//        });
+
+        callback.onError(request, e);
+        callback.onAfter();
     }
 
     public void sendSuccessResultCallback(final Object object, final ResultCallback callback) {
 
-        mDelivery.post(new Runnable() {
-            @Override
-            public void run()
-            {
-                callback.onResponse(object);
-                callback.onAfter();
-            }
-        });
+//        mDelivery.post(new Runnable() {
+//            @Override
+//            public void run()
+//            {
+//                callback.onResponse(object);
+//                callback.onAfter();
+//            }
+//        });
+
+        callback.onResponse(object);
+        callback.onAfter();
     }
 
 }

@@ -2,6 +2,8 @@ package vieboo.http.okhttp.http;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.ImageView;
 
 import com.squareup.okhttp.Call;
@@ -19,9 +21,10 @@ import java.io.InputStream;
 public class ImageDelegate {
 
     private static ImageDelegate mInstance;
+    private Handler uiHandler;
 
     private ImageDelegate() {
-
+        uiHandler = new Handler(Looper.getMainLooper());
     }
 
     public static ImageDelegate getInstance() {
@@ -80,7 +83,7 @@ public class ImageDelegate {
                     ops.inJustDecodeBounds = false;
                     ops.inSampleSize = inSampleSize;
                     final Bitmap bm = BitmapFactory.decodeStream(is, null, ops);
-                    OkHttpClientHelper.getInstance().getDelivery().post(new Runnable() {
+                    uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             view.setImageBitmap(bm);
@@ -105,12 +108,13 @@ public class ImageDelegate {
 
     private void setErrorResId(final ImageView view, final int errorResId)
     {
-        OkHttpClientHelper.getInstance().getDelivery().post(new Runnable() {
+        uiHandler.post(new Runnable() {
             @Override
             public void run() {
                 view.setImageResource(errorResId);
             }
         });
     }
+
 
 }
