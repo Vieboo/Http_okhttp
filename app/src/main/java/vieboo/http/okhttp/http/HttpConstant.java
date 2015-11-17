@@ -12,4 +12,9 @@ public class HttpConstant {
     //POST
     public static final int POST = 2;
 
+    //charset
+    public static final String CHARSET = HttpConstant.CHARSET_UTF8;
+    //utf-8
+    public static final String CHARSET_UTF8 = "utf-8";
+
 }

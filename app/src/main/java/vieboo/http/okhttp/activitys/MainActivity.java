@@ -35,8 +35,7 @@ public class MainActivity extends BaseActivity implements TaskResultCallback
         text = (TextView) findViewById(R.id.text);
 
         mainController = new MainController();
-        mainController.getData1(new Param[]{new Param("oneType", "2"), new Param("twoType", "2"),
-                new Param("lastTime", "1447302020000")},
+        mainController.getData1(new Param[]{new Param("a", "a"), new Param("b", "b")},
                 this, this);
 
 //        System.out.println("1------>" + Thread.currentThread().getName());

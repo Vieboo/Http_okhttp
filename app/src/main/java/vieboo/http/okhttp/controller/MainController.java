@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vieboo.http.okhttp.controller.io.IDataLoadingEventListener;
+import vieboo.http.okhttp.http.HttpConstant;
 import vieboo.http.okhttp.http.Param;
 import vieboo.http.okhttp.http.io.TaskResultCallback;
 
@@ -22,7 +23,7 @@ public class MainController extends BaseController {
                 e.printStackTrace();
             }
         }
-        sendRequestJson("http://app.data.zhaogang.com/Kinterface", 1, jObj, resultCallback, mLoadingIndicator,
-                "加载中", true);
+        sendRequest(HttpConstant.GET, "http://www.weibo.com/vieboo", 1, params,
+                resultCallback, mLoadingIndicator, "", true);
     }
 }

@@ -21,9 +21,9 @@ import vieboo.http.okhttp.http.io.ResultCallback;
  */
 public class PostDelegate {
 
-    private final MediaType MEDIA_TYPE_STREAM = MediaType.parse("application/octet-stream;charset=utf-8");
-    private final MediaType MEDIA_TYPE_STRING = MediaType.parse("text/plain;charset=utf-8");
-    private final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json;charset=utf-8");
+    private final MediaType MEDIA_TYPE_STREAM = MediaType.parse("application/octet-stream;charset=" + HttpConstant.CHARSET);
+    private final MediaType MEDIA_TYPE_STRING = MediaType.parse("text/plain;charset=" + HttpConstant.CHARSET);
+    private final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json;charset=" + HttpConstant.CHARSET);
 
     private static PostDelegate mInstance;
 
